@@ -5,21 +5,14 @@ namespace student_exercises
 {
     public class Cohort
     {
-        public Cohort(string name)
+        public Cohort(string name, int id)
         {
             Name = name;
+            Id = id;
         }
+        public int Id { get; set; }
         public string Name { get; set; }
-        public List<Student> StudentsInCohort { get; set; } = new List<Student>();
-        public List<Instructor> InstructorsInCohort { get; set; } = new List<Instructor>();
-
-        public void AddStudent(Student student)
-        {
-            StudentsInCohort.Add(student);
-        }
-        public void AddInstuctor(Instructor instructor)
-        {
-            InstructorsInCohort.Add(instructor);
-        }
+        public List<Student> Students { get; set; } = new List<Student>();
+        public List<Instructor> Instructors { get; set; } = new List<Instructor>();
     }
 }
