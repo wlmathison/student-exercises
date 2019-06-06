@@ -7,14 +7,14 @@ namespace student_exercises
     {
         static void Main(string[] args)
         {
-            Exercise StudentExercises = new Exercise("Student Exercises", "C#");
-            Exercise Lists = new Exercise("Lists", "C#");
-            Exercise Dictionaries = new Exercise("Dictionaries", "C#");
-            Exercise Classes = new Exercise("Classes", "C#");
-            Exercise ConditionalRouting = new Exercise("Conditional Routing", "React");
-            Exercise DynamicRouting = new Exercise("Dynamic Routing", "React");
-            Exercise StateProps = new Exercise("State and Props", "React");
-            Exercise URLRouting = new Exercise("URL Routing", "React");
+            Exercise StudentExercises = new Exercise("Student Exercises", "C#", 1);
+            Exercise Lists = new Exercise("Lists", "C#", 2);
+            Exercise Dictionaries = new Exercise("Dictionaries", "C#", 3);
+            Exercise Classes = new Exercise("Classes", "C#", 4);
+            Exercise ConditionalRouting = new Exercise("Conditional Routing", "React", 5);
+            Exercise DynamicRouting = new Exercise("Dynamic Routing", "React", 6);
+            Exercise StateProps = new Exercise("State and Props", "React", 7);
+            Exercise URLRouting = new Exercise("URL Routing", "React", 8);
 
             List<Exercise> Exercises = new List<Exercise>();
             Exercises.Add(StudentExercises);
@@ -26,18 +26,18 @@ namespace student_exercises
             Exercises.Add(StateProps);
             Exercises.Add(URLRouting);
 
-            Cohort ThirtyOne = new Cohort("31");
-            Cohort ThirtyTwo = new Cohort("32");
-            Cohort ThirtyThree = new Cohort("33");
+            Cohort c31 = new Cohort("31", 1);
+            Cohort c32 = new Cohort("32", 2);
+            Cohort c33 = new Cohort("33", 3);
 
-            Student Billy = new Student("Billy", "Mathison", "Billy Mathison");
-            Student Jameka = new Student("Jameka", "Echols", "Jameka");
-            Student Alex = new Student("Alex", "Thacker", "Alex Thacker");
-            Student Jonathan = new Student("Jonathan", "Schaffer", "Jonathan Schaffer");
-            Billy.AddCohort(ThirtyOne);
-            Jameka.AddCohort(ThirtyOne);
-            Alex.AddCohort(ThirtyOne);
-            Jonathan.AddCohort(ThirtyOne);
+            Student Billy = new Student("Billy", "Mathison", "Billy Mathison", 1);
+            Student Jameka = new Student("Jameka", "Echols", "Jameka", 2);
+            Student Alex = new Student("Alex", "Thacker", "Alex Thacker", 3);
+            Student Jonathan = new Student("Jonathan", "Schaffer", "Jonathan Schaffer", 4);
+            Billy.Cohort = c31;
+            Jameka.Cohort = c31;
+            Alex.Cohort = c31;
+            Jonathan.Cohort = c31;
 
             List<Student> Students = new List<Student>();
             Students.Add(Billy);
@@ -45,14 +45,18 @@ namespace student_exercises
             Students.Add(Alex);
             Students.Add(Jonathan);
 
-            Instructor Andy = new Instructor("Andy", "Collins", "andyc", "jokes");
-            Instructor Leah = new Instructor("Leah", "Hoefling", "Leah", "dancing");
-            Instructor Jisie = new Instructor("Jisie", "David", "jisie", "jokes");
-            Instructor Kristen = new Instructor("Kristen", "Norris", "kristen.norris", "baking");
-            Andy.AddCohort(ThirtyOne);
-            Leah.AddCohort(ThirtyOne);
-            Jisie.AddCohort(ThirtyThree);
-            Kristen.AddCohort(ThirtyThree);
+            Instructor Andy = new Instructor("Andy", "Collins", "andyc", "jokes", 1);
+            Instructor Leah = new Instructor("Leah", "Hoefling", "Leah", "dancing", 2);
+            Instructor Jisie = new Instructor("Jisie", "David", "jisie", "jokes", 3);
+            Instructor Kristen = new Instructor("Kristen", "Norris", "kristen.norris", "baking", 4);
+            c31.Instructors.Add(Andy);
+            Andy.Cohort = c31;
+            c31.Instructors.Add(Leah);
+            Leah.Cohort = c31;
+            c31.Instructors.Add(Jisie);
+            Jisie.Cohort = c33;
+            c31.Instructors.Add(Kristen);
+            Kristen.Cohort = c33;
 
             Andy.AssignExercise(Billy, StudentExercises);
             Andy.AssignExercise(Billy, Lists);
@@ -89,7 +93,7 @@ namespace student_exercises
 
             foreach(Student student in Students) {
                 Console.WriteLine($"{student.FirstName} {student.LastName}");
-                foreach(Exercise exercise in student.AssignedExercises) {
+                foreach(Exercise exercise in student.Exercises) {
                     Console.WriteLine($" - {exercise.Name} in {exercise.Language}");
                 }
                 Console.WriteLine("------------------------------");
